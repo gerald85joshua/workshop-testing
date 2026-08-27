@@ -1,0 +1,32 @@
+name: Github Actions Demo
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '.github/**'
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '15 10 * * 6'
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wake Up the Runner ☕
+        run: |
+          echo "☀️ Good morning, Sunshine!"
+          echo "🎉 The workflow was triggered by: ${{ github.event_name }}"
+          echo "🌿 Current branch: ${{ github.ref }}"
+          echo "🏠 Repository: ${{ github.repository }}"
+          echo "🚀 Preparing for a highly sophisticated operation..."
+
+      - uses: actions/checkout@v3
+
+      - name: List files in the repository
+        run: |
+          echo "The repository ${{ github.repository }} contains the following files:"
+          tree
